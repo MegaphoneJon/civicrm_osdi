@@ -36,7 +36,7 @@ function civicrm_api3_key_Generate($params) {
   $key = "OSDI_" . strtr($res, '0123456789', 'qrstuvwxyz');
 
   // Store it.
-  Civi::settings()->set("security_key", $key);
-  $returnValues["message"] = "KEY: " . Civi::settings()->get("security_key");
+  Civi::settings()->set("osdi_security_key", $key);
+  $returnValues["message"] = "KEY: " . Civi::settings()->get("osdi_security_key");
   return civicrm_api3_create_success($returnValues, $params, 'Key', 'Generate');
 }

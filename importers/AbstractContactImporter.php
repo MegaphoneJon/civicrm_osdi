@@ -39,7 +39,7 @@ abstract class AbstractContactImporter {
     }
 
     // Shunt the root into the queue.
-    $extractors = Civi::settings()->get("extractors");
+    $extractors = Civi::settings()->get("osdi_extractors");
     if ($extractors == NULL) {
       $extractors = array();
     }
@@ -53,7 +53,7 @@ abstract class AbstractContactImporter {
 
     $extractors[] = serialize($final_data);
 
-    Civi::settings()->set("extractors", $extractors);
+    Civi::settings()->set("osdi_extractors", $extractors);
 
     return $counter;
   }

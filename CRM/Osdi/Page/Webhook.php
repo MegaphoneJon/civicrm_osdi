@@ -56,7 +56,7 @@ class CRM_Osdi_Page_Webhook extends CRM_Core_Page {
     $object = isset($headers["Object"]) ? $headers["Object"] : NULL;
 
     // Check CMS's permission for (presumably) anonymous users.
-    if ($apikey != Civi::settings()->get("security_key")) {
+    if ($apikey != Civi::settings()->get("osdi_security_key")) {
       header('Content-Type:application/hal+json', TRUE, 500);
       print "Missing or incorrent apikey.";
       CRM_Utils_System::civiExit();

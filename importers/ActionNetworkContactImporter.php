@@ -90,13 +90,13 @@ class ActionNetworkContactImporter extends AbstractContactImporter {
     $final_data = new ResourceStruct($entryobject, $rule, $filter, $group, $zone, $this->apikey, "");
 
     // Shunt the root into the queue.
-    $extractors = Civi::settings()->get("extractors");
+    $extractors = Civi::settings()->get("osdi_extractors");
     if ($extractors == NULL) {
       $extractors = array();
     }
 
     $extractors[] = serialize($final_data);
-    Civi::settings()->set("extractors", $extractors);
+    Civi::settings()->set("osdi_extractors", $extractors);
 
     $serialized_item = serialize($final_data);
     return $serialized_item;

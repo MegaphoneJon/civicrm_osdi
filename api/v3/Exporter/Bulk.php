@@ -117,14 +117,14 @@ function civicrm_api3_exporter_Bulk($params) {
   }
 
   // Check if we've run this before.
-  $exporters_offset = Civi::settings()->get("exporters_offset");
+  $exporters_offset = Civi::settings()->get("osdi_exporters_offset");
   if ($exporters_offset != NULL) {
     if (isset($exporters_offset[$second_key])) {
       $offset = $exporters_offset[$second_key];
     }
     else {
       $exporters_offset[$second_key] = 0;
-      Civi::settings()->set("exporters_offset", $exporters_offset);
+      Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
 
       $returnValues["count"] = $initcode;
       return civicrm_api3_create_success($returnValues, $params, 'Exporter', 'Bulk');
@@ -133,7 +133,7 @@ function civicrm_api3_exporter_Bulk($params) {
   else {
     $exporters_offset = array();
     $exporters_offset[$second_key] = 0;
-    Civi::settings()->set("exporters_offset", $exporters_offset);
+    Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
 
     $returnValues["count"] = $initcode;
     return civicrm_api3_create_success($returnValues, $params, 'Exporter', 'Bulk');
@@ -143,7 +143,7 @@ function civicrm_api3_exporter_Bulk($params) {
     // If RESTART is on, or if this is an update job, restart the job and return.
     if ($params["updatejob"] == 1 or $allow_restart) {
       $exporters_offset[$second_key] = 0;
-      Civi::settings()->set("exporters_offset", $exporters_offset);
+      Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
 
       $returnValues["count"] = $initcode;
       return civicrm_api3_create_success($returnValues, $params, 'Exporter', 'Bulk');
@@ -258,12 +258,12 @@ function civicrm_api3_exporter_Bulk($params) {
 
     $offset = $offset + 100;
     $exporters_offset[$second_key] = $offset;
-    Civi::settings()->set("exporters_offset", $exporters_offset);
+    Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
 
   }
   else {
     $exporters_offset[$second_key] = "DONE";
-    Civi::settings()->set("exporters_offset", $exporters_offset);
+    Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
 
     $count = $completedcode;
   }

@@ -32,9 +32,9 @@ function _civicrm_api3_importer_Settime_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_importer_Settime($params) {
-  Civi::settings()->set('server_time_zone', $params["zone"]);
+  Civi::settings()->set('osdi_server_time_zone', $params["zone"]);
 
-  $returnValues["result_zone"] = Civi::settings()->get("server_time_zone");
+  $returnValues["result_zone"] = Civi::settings()->get("osdi_server_time_zone");
 
   return civicrm_api3_create_success($returnValues, $params, 'Importer', 'SetTime');
 }

@@ -93,7 +93,7 @@ function civicrm_api3_exporter_Export($params) {
       // Now convert this daet to the CIVI time zone.
       if ($date != FALSE) {
         $date = date('Y-m-d H:i:s',
-        $date - 3600 * (int) Civi::settings()->get("server_time_zone"));
+        $date - 3600 * (int) Civi::settings()->get("osdi_server_time_zone"));
       }
       else {
         $date = "1980-01-01";

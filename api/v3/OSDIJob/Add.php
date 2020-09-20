@@ -213,9 +213,9 @@ function civicrm_api3_o_s_d_i_job_Add($params) {
             }
             $second_key = $params["signupendpoint"] . $hash;
 
-            $exporters_offset = Civi::settings()->get("exporters_offset");
+            $exporters_offset = Civi::settings()->get("osdi_exporters_offset");
             unset($exporters_offset[$second_key]);
-            Civi::settings()->set("exporters_offset", $exporters_offset);
+            Civi::settings()->set("osdi_exporters_offset", $exporters_offset);
           }
 
           // and then continue the edit job as it were

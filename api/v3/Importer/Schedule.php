@@ -62,7 +62,7 @@ function buildRequest($entryobject) {
 function civicrm_api3_importer_Schedule($params) {
   $returnValues = array();
   // Get out if nobody started.
-  $extractors = Civi::settings()->get("extractors");
+  $extractors = Civi::settings()->get("osdi_extractors");
   if ($extractors == NULL) {
     $returnValues["status"] = "no variable set";
     return civicrm_api3_create_success($returnValues, $params, 'Importer', 'schedule');
@@ -73,7 +73,7 @@ function civicrm_api3_importer_Schedule($params) {
 
   // Run this 20 times, quit if you hit NULL.
   $to_unserialize = array_pop($extractors);
-  Civi::settings()->set("extractors", $extractors);
+  Civi::settings()->set("osdi_extractors", $extractors);
 
   $malformed = FALSE;
   if (is_string($to_unserialize)) {
@@ -163,9 +163,9 @@ function civicrm_api3_importer_Schedule($params) {
 
   $returned_data = new ResourceStruct($entryobject, $rootdata->rule, $rootdata->filter, $rootdata->group, $zone, $apikey, $rootdata->endpoint);
 
-  $extractors = Civi::settings()->get("extractors");
+  $extractors = Civi::settings()->get("osdi_extractors");
   $extractors[] = serialize($returned_data);
-  Civi::settings()->set("extractors", $extractors);
+  Civi::settings()->set("osdi_extractors", $extractors);
 
   $returnValues["status"] = "partially completed";
   $returnValues["counter"] = $counter;
